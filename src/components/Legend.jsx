@@ -1,18 +1,23 @@
 import React from "react";
 
-export default function Legend({ parts }) {
+export default function Legend({ values }) {
+	let inputValues = Object.values(values);
+	let fullValue = inputValues.reduce((a, c) => +a + +c, 0);
+
 	return (
 		<ul className='legend'>
-			<li>1</li>
-			<li>2</li>
-			<li>3</li>
-			<li>4</li>
-			<li>5</li>
-			<li>6</li>
-			<li>7</li>
-			<li>8</li>
-			<li>9</li>
-			<li>10</li>
+			<li>
+				{values["--value1"]}
+				{` (${((values["--value1"] / fullValue) * 100).toFixed(2)} %) `}
+			</li>
+			<li>
+				{values["--value2"]}
+				{` (${((values["--value2"] / fullValue) * 100).toFixed(2)} %) `}
+			</li>
+			<li>
+				{values["--value3"]}
+				{` (${((values["--value3"] / fullValue) * 100).toFixed(2)} %) `}
+			</li>
 		</ul>
 	);
 }

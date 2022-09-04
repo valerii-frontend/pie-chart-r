@@ -1,43 +1,54 @@
 import "./App.css";
+import { useState } from "react";
 import Legend from "./components/Legend";
 import PieChart from "./components/PieChart";
 
 function App() {
-	const style = {};
+	const [inputs, setInputs] = useState({});
+
 	return (
 		<div className='App'>
-			<PieChart style={style} />
-			<Legend />
+			<PieChart values={inputs} />
+			<Legend values={inputs} />
 			<div className='data'>
 				<div className='input'>
-					<label for='1'>1</label> <input id='1' />
+					<label htmlFor='1'>1</label>
+					<input
+						min={0}
+						step={1}
+						type='number'
+						id='1'
+						defaultValue={1}
+						onChange={(e) => {
+							setInputs({ ...inputs, "--value1": e.target.value });
+						}}
+					/>
 				</div>
 				<div className='input'>
-					<label for='2'>2</label> <input id='2' />
+					<label htmlFor='2'>2</label>
+					<input
+						min={0}
+						step={1}
+						type='number'
+						defaultValue={1}
+						id='2'
+						onChange={(e) => {
+							setInputs({ ...inputs, "--value2": e.target.value });
+						}}
+					/>
 				</div>
 				<div className='input'>
-					<label for='3'>3</label> <input id='3' />
-				</div>
-				<div className='input'>
-					<label for='4'>4</label> <input id='4' />
-				</div>
-				<div className='input'>
-					<label for='5'>5</label> <input id='5' />
-				</div>
-				<div className='input'>
-					<label for='6'>6</label> <input id='6' />
-				</div>
-				<div className='input'>
-					<label for='7'>7</label> <input id='7' />
-				</div>
-				<div className='input'>
-					<label for='8'>8</label> <input id='8' />
-				</div>
-				<div className='input'>
-					<label for='9'>9</label> <input id='9' />
-				</div>
-				<div className='input'>
-					<label for='10'>10</label> <input id='10' />
+					<label htmlFor='3'>3</label>
+					<input
+						min={0}
+						step={1}
+						defaultValue={1}
+						type='number'
+						id='3'
+						onChange={(e) => {
+							setInputs({ ...inputs, "--value3": e.target.value });
+						}}
+					/>
 				</div>
 			</div>
 		</div>
