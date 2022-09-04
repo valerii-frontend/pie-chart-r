@@ -1,38 +1,174 @@
+:root {
+	--light: 35%;
+	--gap: 1rem;
+	--num: 36;
+	--color1: hsl(0, 50%, var(--light));
+	--color2: hsl(calc(var(--num) * 2), 50%, var(--light));
+	--color3: hsl(calc(var(--num) * 4), 50%, var(--light));
+	--color4: hsl(calc(var(--num) * 6), 50%, var(--light));
+	--color5: hsl(calc(var(--num) * 8), 50%, var(--light));
+	--color6: hsl(calc(var(--num) * 10), 50%, var(--light));
+	--color7: hsl(calc(var(--num) * 3), 50%, var(--light));
+	--color8: hsl(calc(var(--num) * 5), 50%, var(--light));
+	--color9: hsl(calc(var(--num) * 7), 50%, var(--light));
+	--color10: hsl(calc(var(--num) * 9), 50%, var(--light));
+	--value1: 10%;
+	--value2: 8%;
+	--value3: 20%;
+	--value4: 11%;
+	--value5: 9%;
+	--value6: 10%;
+	--value7: 6%;
+	--value8: 8%;
+	--value9: 5%;
+	--value10: 7%;
+	--_value2: calc(var(--value1) + var(--value2));
+	--_value3: calc(var(--_value2) + var(--value3));
+	--_value4: calc(var(--_value3) + var(--value4));
+	--_value5: calc(var(--_value4) + var(--value5));
+	--_value6: calc(var(--_value5) + var(--value6));
+	--_value7: calc(var(--_value6) + var(--value7));
+	--_value8: calc(var(--_value7) + var(--value8));
+	--_value9: calc(var(--_value8) + var(--value9));
+	--_value10: calc(var(--_value9) + var(--value10));
+	--pieSize: 25rem;
+}
 .App {
-  text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5rem;
+	font: 18px/1.5 Arial;
+	flex-wrap: wrap;
+}
+.data {
+	flex: 0 0 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+.input {
+	flex: 0 0 25%;
+	text-align: center;
+	margin-bottom: 1rem;
+}
+.input input {
+	height: 30px;
+	width: 150px;
+}
+/* pie styles */
+.wrap {
+	width: 500px;
+	height: 500px;
+	position: relative;
+	transform: rotateY(15deg) rotateX(45deg);
+	perspective: 10000px;
+	transform-style: preserve-3d;
+}
+.pie_1 {
+	filter: brightness(1.3);
+}
+.pie {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: conic-gradient(
+		var(--color1) var(--value1),
+		var(--color2) 0 var(--_value2, 0),
+		var(--color3) 0 var(--_value3, 0),
+		var(--color4) 0 var(--_value4, 0),
+		var(--color5) 0 var(--_value5, 0),
+		var(--color6) 0 var(--_value6, 0),
+		var(--color7) 0 var(--_value7, 0),
+		var(--color8) 0 var(--_value8, 0),
+		var(--color9) 0 var(--_value9, 0),
+		var(--color10) 0 var(--_value10, 0),
+		#979797 0
+	);
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.pie_2 {
+	transform: translateZ(-2px);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.pie_3 {
+	transform: translateZ(-4px);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.pie_4 {
+	transform: translateZ(-6px);
 }
-
-.App-link {
-  color: #61dafb;
+.pie_5 {
+	transform: translateZ(-8px);
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.pie_6 {
+	transform: translateZ(-10px);
+}
+.pie_7 {
+	transform: translateZ(-12px);
+}
+.pie_8 {
+	transform: translateZ(-14px);
+}
+.pie_9 {
+	transform: translateZ(-16px);
+}
+.pie_10 {
+	transform: translateZ(-18px);
+	filter: brightness(0.8);
+}
+.legend {
+	width: 500px;
+	height: 500px;
+	border: 2px solid rgba(87, 169, 169, 0.1);
+	display: flex;
+	flex-direction: column;
+	border-radius: 0.5rem;
+	padding: 2rem;
+	list-style: none;
+	background-color: #efefef;
+	box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.3);
+}
+.legend li {
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+}
+.legend li:before {
+	content: "";
+	width: 24px;
+	height: 24px;
+	margin-right: 1rem;
+	background-color: var(--color-cube);
+	border-radius: 0.3rem;
+}
+.legend li:nth-child(1):before {
+	--color-cube: var(--color1);
+}
+.legend li:nth-child(2):before {
+	--color-cube: var(--color2);
+}
+.legend li:nth-child(3):before {
+	--color-cube: var(--color3);
+}
+.legend li:nth-child(4):before {
+	--color-cube: var(--color4);
+}
+.legend li:nth-child(5):before {
+	--color-cube: var(--color5);
+}
+.legend li:nth-child(6):before {
+	--color-cube: var(--color6);
+}
+.legend li:nth-child(7):before {
+	--color-cube: var(--color7);
+}
+.legend li:nth-child(8):before {
+	--color-cube: var(--color8);
+}
+.legend li:nth-child(9):before {
+	--color-cube: var(--color9);
+}
+.legend li:nth-child(10):before {
+	--color-cube: var(--color10);
 }
