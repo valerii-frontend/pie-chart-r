@@ -1,12 +1,292 @@
-body {
+*,
+*:before,
+*:after {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-		"Droid Sans", "Helvetica Neue", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	min-height: 100vh;
 	padding: 0;
+	box-sizing: border-box;
+}
+:root {
+	--light-grey: #efefef;
+	--border: 2px solid rgba(87, 169, 169, 0.1);
+	--shadow: rgba(100, 100, 100, 0.3);
+	--gap: 1rem;
+	--num: 36;
+	--color1: hsl(0, 50%, 35%);
+	--color2: hsl(calc(var(--num) * 2), 50%, 35%);
+	--color3: hsl(calc(var(--num) * 4), 50%, 35%);
+	--color4: hsl(calc(var(--num) * 6), 50%, 35%);
+	--color5: hsl(calc(var(--num) * 8), 50%, 35%);
+	--color6: hsl(calc(var(--num) * 10), 50%, 35%);
+	--color7: hsl(calc(var(--num) * 3), 50%, 35%);
+	--color8: hsl(calc(var(--num) * 5), 50%, 35%);
+	--color9: hsl(calc(var(--num) * 7), 50%, 35%);
+	--color10: hsl(calc(var(--num) * 9), 50%, 35%);
+	--pieSize: 25rem;
+}
+#root {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	min-height: 100vh;
+	color: #333;
+}
+.App {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	font: 18px/1.5 Arial;
+	--x: 15;
+	--y: 45;
+	--z: 0;
+	--scale: 1;
+}
+.App h1 {
+	position: fixed;
+	top: 0;
+	left: 198px;
+	right: 198px;
+	box-shadow: 0 1px 1px 0 var(--shadow);
+	max-width: 100%;
+	text-align: center;
+	font-size: 2rem;
+	background-color: var(--light-grey);
+	z-index: 10;
+	transition: all 1s;
+	transform: translateY(-100%);
+}
+.App.load h1 {
+	transform: translateY(0);
+}
+.App h1:before {
+	content: "";
+	position: absolute;
+	top: 0;
+}
+.sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	flex: 0 0 100%;
+	padding: 3rem 1rem;
+	width: 200px;
+	border-right: var(--border);
+	background-color: var(--light-grey);
+	box-shadow: 0 0 10px 0 var(--shadow);
+	transform: translateX(-100%);
+	transition: all 1s;
+}
+.App.load .sidebar {
+	transform: translateX(0);
+}
+.input {
+	flex: 0 0 100%;
+	margin-bottom: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+.input input {
+	height: 30px;
+	width: 150px;
+	border-radius: 0.3rem;
+	border: 1px solid grey;
+}
+.modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 100px;
+	height: 50px;
+	border: var(--border);
+	background-color: var(--light-grey);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: 1s all;
+	z-index: 16;
+}
+.modal button {
+	width: 50px;
+	height: 25px;
+}
+.modal button:hover {
+	filter: brightness(0.9);
+	cursor: pointer;
+}
+.App.load .modal {
+	opacity: 0;
+	transform: translateY(100%);
+}
+/* pie styles */
+.wrap {
+	width: 500px;
+	height: 500px;
+	position: relative;
+	transform: rotateY(calc(var(--x) * 1deg)) rotateX(calc(var(--y) * 1deg)) rotateZ(calc(var(--z) * 1deg))
+		scale(var(--scale));
+	perspective: 10000px;
+	transform-style: preserve-3d;
+	z-index: 3;
+	opacity: 0;
+	transition: opacity 1s;
+}
+.App.load .wrap {
+	opacity: 1;
+	transition: opacity 1s;
+}
+.pie {
+	position: absolute;
+	top: 0;
+	left: 0;
+	--_value2: calc(var(--value1) + var(--value2));
+	--_value3: calc(var(--_value2) + var(--value3));
+	--_value4: calc(var(--_value3) + var(--value4));
+	--_value5: calc(var(--_value4) + var(--value5));
+	--_value6: calc(var(--_value5) + var(--value6));
+	--_value7: calc(var(--_value6) + var(--value7));
+	--_value8: calc(var(--_value7) + var(--value8));
+	--_value9: calc(var(--_value8) + var(--value9));
+	--_value10: calc(var(--_value9) + var(--value10));
+	background: conic-gradient(
+		var(--color1) var(--value1, 0),
+		var(--color2) 0 var(--value2, 0),
+		var(--color3) 0 var(--value3, 0),
+		var(--color4) 0 var(--value4, 0),
+		var(--color5) 0 var(--value5, 0),
+		var(--color6) 0 var(--value6, 0),
+		var(--color7) 0 var(--value7, 0),
+		var(--color8) 0 var(--value8, 0),
+		var(--color9) 0 var(--value9, 0),
+		var(--color10) 0 var(--value10, 0),
+		#979797 0
+	);
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.pie_1 {
+	filter: brightness(1.3);
+}
+.pie_2 {
+	transform: translateZ(-2px);
+}
+.pie_3 {
+	transform: translateZ(-4px);
+}
+.pie_4 {
+	transform: translateZ(-6px);
+}
+.pie_5 {
+	transform: translateZ(-8px);
+}
+.pie_6 {
+	transform: translateZ(-10px);
+}
+.pie_7 {
+	transform: translateZ(-12px);
+}
+.pie_8 {
+	transform: translateZ(-14px);
+}
+.pie_9 {
+	transform: translateZ(-16px);
+}
+.pie_10 {
+	transform: translateZ(-18px);
+}
+.pie_11 {
+	transform: translateZ(-20px);
+}
+.pie_12 {
+	transform: translateZ(-22px);
+}
+.pie_13 {
+	transform: translateZ(-24px);
+}
+.pie_14 {
+	transform: translateZ(-26px);
+}
+.pie_15 {
+	transform: translateZ(-28px);
+}
+.pie_16 {
+	transform: translateZ(-30px);
+}
+.pie_17 {
+	transform: translateZ(-32px);
+}
+.pie_18 {
+	transform: translateZ(-34px);
+}
+.pie_19 {
+	transform: translateZ(-36px);
+}
+.pie_20 {
+	transform: translateZ(-38px);
+	filter: brightness(0.8);
+}
+
+.legend {
+	position: fixed;
+	right: 0;
+	top: 0;
+	height: 100%;
+	width: 200px;
+	border-radius: 0.5rem;
+	padding: 2rem;
+	border: var(--border);
+	background-color: var(--light-grey);
+	box-shadow: 0 0 10px 0 var(--shadow);
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	transition: all 1s;
+	transform: translateX(100%);
+}
+.App.load .legend {
+	transform: translateX(0);
+}
+
+.legend li {
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+}
+.legend li:before {
+	content: "";
+	width: 24px;
+	height: 24px;
+	margin-right: 1rem;
+	background-color: var(--color-cube);
+	border-radius: 0.3rem;
+}
+.legend li:nth-child(1):before {
+	--color-cube: var(--color1);
+}
+.legend li:nth-child(2):before {
+	--color-cube: var(--color2);
+}
+.legend li:nth-child(3):before {
+	--color-cube: var(--color3);
+}
+.legend li:nth-child(4):before {
+	--color-cube: var(--color4);
+}
+.legend li:nth-child(5):before {
+	--color-cube: var(--color5);
+}
+.legend li:nth-child(6):before {
+	--color-cube: var(--color6);
+}
+.legend li:nth-child(7):before {
+	--color-cube: var(--color7);
+}
+.legend li:nth-child(8):before {
+	--color-cube: var(--color8);
+}
+.legend li:nth-child(9):before {
+	--color-cube: var(--color9);
+}
+.legend li:nth-child(10):before {
+	--color-cube: var(--color10);
 }

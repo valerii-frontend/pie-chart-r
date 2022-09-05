@@ -26,6 +26,16 @@ export default function PieChart({ values, fullValue }) {
 			<div className='pie pie_8'></div>
 			<div className='pie pie_9'></div>
 			<div className='pie pie_10'></div>
+			<div className='pie pie_11'></div>
+			<div className='pie pie_12'></div>
+			<div className='pie pie_13'></div>
+			<div className='pie pie_14'></div>
+			<div className='pie pie_15'></div>
+			<div className='pie pie_16'></div>
+			<div className='pie pie_17'></div>
+			<div className='pie pie_18'></div>
+			<div className='pie pie_19'></div>
+			<div className='pie pie_20'></div>
 		</div>
 	);
 }
