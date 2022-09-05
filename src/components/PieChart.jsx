@@ -1,11 +1,9 @@
 import React from "react";
 
-export default function PieChart({ values }) {
+export default function PieChart({ values, fullValue }) {
 	let styles = {};
 
 	const updateStyle = (count) => {
-		let inputValues = Object.values(values);
-		let fullValue = inputValues.reduce((a, c) => +a + +c, 0);
 		let temp = [];
 		temp[0] = +values[`--value${1}`];
 		styles[`--value${1}`] = `${((temp[0] / fullValue) * 100).toFixed(2)}%`;

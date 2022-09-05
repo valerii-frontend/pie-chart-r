@@ -20,59 +20,81 @@ function App() {
 			/>
 		</div>
 	);
-	const [rotate, setRotate] = useState({ x: 15, y: 45 });
+	const [controls, setControls] = useState({ x: 15, y: 45, z: 0, s: 1 });
+	let fullValue = Object.values(inputs).reduce((a, c) => +a + +c, 0);
 
 	return (
-		<div className='App' style={{ "--x": rotate.x, "--y": rotate.y, "--z": rotate.z }}>
-			<PieChart values={inputs} />
-			<Legend values={inputs} />
+		<div className='App' style={{ "--x": controls.x, "--y": controls.y, "--z": controls.z, "--scale": controls.s }}>
+			<h1>Total - {fullValue}</h1>
+			<PieChart values={inputs} fullValue={fullValue} />
+			<Legend values={inputs} fullValue={fullValue} />
 			<div className='data'>
 				{newInput(1)}
 				{newInput(2)}
 				{newInput(3)}
-				<div className='rotates'>
-					<div className='x'>
-						<label htmlFor='rangeX'>Rotate X</label>
+				<div className='controls'>
+					<div className='rotate-x'>
+						<label htmlFor='rangeX'>
+							Rotate X - <strong>{controls.x}°</strong>
+						</label>
+
 						<input
-							min={1}
+							min={0}
 							max={360}
 							step={1}
 							defaultValue={15}
 							type='range'
 							id='rangeX'
 							onChange={(e) => {
-								console.log(rotate);
-								setRotate({ ...rotate, x: e.target.value });
+								setControls({ ...controls, x: e.target.value });
 							}}
 						/>
 					</div>
-					<div className='y'>
-						<label htmlFor='rangeY'>Rotate Y</label>
+					<div className='rotate-y'>
+						<label htmlFor='rangeY'>
+							Rotate Y - <strong>{controls.y}°</strong>
+						</label>
 						<input
-							min={1}
+							min={0}
 							max={360}
 							step={1}
 							defaultValue={15}
 							type='range'
 							id='rangeY'
 							onChange={(e) => {
-								console.log(rotate);
-								setRotate({ ...rotate, y: e.target.value });
+								setControls({ ...controls, y: e.target.value });
 							}}
 						/>
 					</div>
-					<div className='z'>
-						<label htmlFor='rangeZ'>Rotate Z</label>
+					<div className='rotate-z'>
+						<label htmlFor='rangeZ'>
+							Rotate Z - <strong>{controls.z}°</strong>
+						</label>
 						<input
-							min={1}
+							min={0}
 							max={360}
 							step={1}
-							defaultValue={0}
+							defaultValue={15}
 							type='range'
 							id='rangeZ'
 							onChange={(e) => {
-								console.log(rotate);
-								setRotate({ ...rotate, z: e.target.value });
+								setControls({ ...controls, z: e.target.value });
+							}}
+						/>
+					</div>
+					<div className='scale'>
+						<label htmlFor='scale'>
+							Scale - <strong>{controls.s}</strong>
+						</label>
+						<input
+							min={1}
+							max={2}
+							step={0.2}
+							defaultValue={1}
+							type='range'
+							id='scale'
+							onChange={(e) => {
+								setControls({ ...controls, s: e.target.value });
 							}}
 						/>
 					</div>

@@ -1,4 +1,13 @@
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 :root {
+	--border: 2px solid rgba(87, 169, 169, 0.1);
+	--shadow: rgba(100, 100, 100, 0.3);
 	--gap: 1rem;
 	--num: 36;
 	--color1: hsl(0, 50%, 35%);
@@ -13,16 +22,36 @@
 	--color10: hsl(calc(var(--num) * 9), 50%, 35%);
 	--pieSize: 25rem;
 }
+#root {
+	width: 100%;
+	color: #333;
+}
 .App {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	gap: 10rem;
+	justify-content: space-evenly;
 	font: 18px/1.5 Arial;
-	flex-wrap: wrap;
 	--x: 15;
 	--y: 45;
 	--z: 0;
+	--scale: 1;
+}
+.App h1 {
+	position: fixed;
+	top: 0;
+	left: 198px;
+	right: 198px;
+	box-shadow: 0 1px 1px 0 var(--shadow);
+	max-width: 100%;
+	text-align: center;
+	font-size: 2rem;
+	background-color: #efefef;
+	z-index: 10;
+}
+.App h1:before {
+	content: "";
+	position: absolute;
+	top: 0;
 }
 .data {
 	position: fixed;
@@ -30,11 +59,11 @@
 	left: 0;
 	height: 100%;
 	flex: 0 0 100%;
-	padding: 1rem;
+	padding: 3rem 1rem;
 	width: 200px;
-	border-right: 2px solid rgba(87, 169, 169, 0.1);
+	border-right: var(--border);
 	background-color: #efefef;
-	box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.3);
+	box-shadow: 0 0 10px 0 var(--shadow);
 }
 .input {
 	flex: 0 0 100%;
@@ -54,9 +83,11 @@
 	width: 500px;
 	height: 500px;
 	position: relative;
-	transform: rotateY(calc(var(--x) * 1deg)) rotateX(calc(var(--y) * 1deg)) rotateZ(calc(var(--z) * 1deg));
+	transform: rotateY(calc(var(--x) * 1deg)) rotateX(calc(var(--y) * 1deg)) rotateZ(calc(var(--z) * 1deg))
+		scale(var(--scale));
 	perspective: 10000px;
 	transform-style: preserve-3d;
+	z-index: 3;
 }
 .pie {
 	position: absolute;
@@ -120,13 +151,16 @@
 	filter: brightness(0.8);
 }
 .legend {
+	position: fixed;
+	right: 0;
+	top: 0;
+	height: 100%;
+	width: 200px;
 	border-radius: 0.5rem;
 	padding: 2rem;
-	border: 2px solid rgba(87, 169, 169, 0.1);
+	border: var(--border);
 	background-color: #efefef;
-	box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.3);
-}
-.legend ul {
+	box-shadow: 0 0 10px 0 var(--shadow);
 	display: flex;
 	flex-direction: column;
 	list-style: none;

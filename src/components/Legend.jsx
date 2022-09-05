@@ -1,9 +1,6 @@
 import React from "react";
 
-export default function Legend({ values }) {
-	let inputValues = Object.values(values);
-	let fullValue = inputValues.reduce((a, c) => +a + +c, 0);
-
+export default function Legend({ values, fullValue }) {
 	const newItem = (num) =>
 		values["--value" + num] && (
 			<li>
@@ -13,13 +10,10 @@ export default function Legend({ values }) {
 		);
 
 	return (
-		<div className='legend'>
-			<h1>Total - {fullValue}</h1>
-			<ul className='list'>
-				{newItem(1)}
-				{newItem(2)}
-				{newItem(3)}
-			</ul>
-		</div>
+		<ul className='legend'>
+			{newItem(1)}
+			{newItem(2)}
+			{newItem(3)}
+		</ul>
 	);
 }
