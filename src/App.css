@@ -22,6 +22,7 @@
 	flex-wrap: wrap;
 	--x: 15;
 	--y: 45;
+	--z: 0;
 }
 .data {
 	position: fixed;
@@ -53,7 +54,7 @@
 	width: 500px;
 	height: 500px;
 	position: relative;
-	transform: rotateY(calc(var(--x) * 1deg)) rotateX(calc(var(--y) * 1deg));
+	transform: rotateY(calc(var(--x) * 1deg)) rotateX(calc(var(--y) * 1deg)) rotateZ(calc(var(--z) * 1deg));
 	perspective: 10000px;
 	transform-style: preserve-3d;
 }
