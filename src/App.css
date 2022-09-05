@@ -58,7 +58,7 @@
 	--_value9: calc(var(--_value8) + var(--value9));
 	--_value10: calc(var(--_value9) + var(--value10));
 	background: conic-gradient(
-		var(--color1) var(--value1),
+		var(--color1) var(--value1, 0),
 		var(--color2) 0 var(--value2, 0),
 		var(--color3) 0 var(--value3, 0),
 		var(--color4) 0 var(--value4, 0),
@@ -106,16 +106,16 @@
 	filter: brightness(0.8);
 }
 .legend {
-	width: 500px;
-	height: 500px;
-	border: 2px solid rgba(87, 169, 169, 0.1);
-	display: flex;
-	flex-direction: column;
 	border-radius: 0.5rem;
 	padding: 2rem;
-	list-style: none;
+	border: 2px solid rgba(87, 169, 169, 0.1);
 	background-color: #efefef;
 	box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.3);
+}
+.legend ul {
+	display: flex;
+	flex-direction: column;
+	list-style: none;
 }
 .legend li {
 	margin-bottom: 1rem;

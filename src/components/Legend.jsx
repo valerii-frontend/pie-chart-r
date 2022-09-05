@@ -4,20 +4,22 @@ export default function Legend({ values }) {
 	let inputValues = Object.values(values);
 	let fullValue = inputValues.reduce((a, c) => +a + +c, 0);
 
+	const newItem = (num) =>
+		values["--value" + num] && (
+			<li>
+				{values["--value" + num]}
+				{` (${((values["--value" + num] / fullValue) * 100).toFixed(2)}%) `}
+			</li>
+		);
+
 	return (
-		<ul className='legend'>
-			<li>
-				{values["--value1"]}
-				{` (${((values["--value1"] / fullValue) * 100).toFixed(2)} %) `}
-			</li>
-			<li>
-				{values["--value2"]}
-				{` (${((values["--value2"] / fullValue) * 100).toFixed(2)} %) `}
-			</li>
-			<li>
-				{values["--value3"]}
-				{` (${((values["--value3"] / fullValue) * 100).toFixed(2)} %) `}
-			</li>
-		</ul>
+		<div className='legend'>
+			<h1>Total - {fullValue}</h1>
+			<ul className='list'>
+				{newItem(1)}
+				{newItem(2)}
+				{newItem(3)}
+			</ul>
+		</div>
 	);
 }
