@@ -2,17 +2,17 @@ import React from "react";
 
 export default function PieChart({ values }) {
 	let styles = {};
-	let temp = {};
-	let inputValues = Object.values(values);
-	console.log(values);
-	let fullValue = inputValues.reduce((a, c) => +a + +c, 0);
-	const updateStyle = () => {
-		temp["--value1"] = +values["--value1"];
-		temp["--value2"] = +values["--value1"] + +values["--value2"];
-		temp["--value3"] = +values["--value1"] + +values["--value2"] + +values["--value3"];
-		styles["--value1"] = `${((temp["--value1"] / fullValue) * 100).toFixed(2)}%`;
-		styles["--value2"] = `${((temp["--value2"] / fullValue) * 100).toFixed(2)}%`;
-		styles["--value3"] = `${((temp["--value3"] / fullValue) * 100).toFixed(2)}%`;
+
+	const updateStyle = (count) => {
+		let inputValues = Object.values(values);
+		let fullValue = inputValues.reduce((a, c) => +a + +c, 0);
+		let temp = [];
+		temp[0] = +values[`--value${1}`];
+		styles[`--value${1}`] = `${((temp[0] / fullValue) * 100).toFixed(2)}%`;
+		temp[1] = temp[0] + +values[`--value${2}`];
+		styles[`--value${2}`] = `${((temp[1] / fullValue) * 100).toFixed(2)}%`;
+		temp[2] = temp[1] + +values[`--value${3}`];
+		styles[`--value${3}`] = `${((temp[2] / fullValue) * 100).toFixed(2)}%`;
 	};
 	updateStyle();
 

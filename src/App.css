@@ -17,24 +17,35 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 5rem;
+	gap: 10rem;
 	font: 18px/1.5 Arial;
 	flex-wrap: wrap;
 }
 .data {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
 	flex: 0 0 100%;
-	display: flex;
-	flex-wrap: wrap;
+	padding: 1rem;
+	width: 200px;
+	border-right: 2px solid rgba(87, 169, 169, 0.1);
+	background-color: #efefef;
+	box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.3);
 }
 .input {
-	flex: 0 0 25%;
-	text-align: center;
+	flex: 0 0 100%;
 	margin-bottom: 1rem;
+	display: flex;
+	flex-direction: column;
 }
 .input input {
 	height: 30px;
 	width: 150px;
+	border-radius: 0.3rem;
+	border: 1px solid grey;
 }
+
 /* pie styles */
 .wrap {
 	width: 500px;
