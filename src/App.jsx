@@ -20,15 +20,48 @@ function App() {
 			/>
 		</div>
 	);
+	const [rotate, setRotate] = useState({ x: 15, y: 45 });
 
 	return (
-		<div className='App'>
+		<div className='App' style={{ "--x": rotate.x, "--y": rotate.y }}>
 			<PieChart values={inputs} />
 			<Legend values={inputs} />
 			<div className='data'>
 				{newInput(1)}
 				{newInput(2)}
 				{newInput(3)}
+				<div className='rotates'>
+					<div>
+						<label htmlFor='range'>Rotate X</label>
+						<input
+							min={1}
+							max={360}
+							step={1}
+							defaultValue={15}
+							type='range'
+							id='range'
+							onChange={(e) => {
+								console.log(rotate);
+								setRotate({ ...rotate, x: e.target.value });
+							}}
+						/>
+					</div>
+					<div>
+						<label htmlFor='range'>Rotate Y</label>
+						<input
+							min={1}
+							max={360}
+							step={1}
+							defaultValue={15}
+							type='range'
+							id='range'
+							onChange={(e) => {
+								console.log(rotate);
+								setRotate({ ...rotate, y: e.target.value });
+							}}
+						/>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

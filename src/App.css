@@ -20,6 +20,8 @@
 	gap: 10rem;
 	font: 18px/1.5 Arial;
 	flex-wrap: wrap;
+	--x: 15;
+	--y: 45;
 }
 .data {
 	position: fixed;
@@ -51,7 +53,7 @@
 	width: 500px;
 	height: 500px;
 	position: relative;
-	transform: rotateY(15deg) rotateX(45deg);
+	transform: rotateY(calc(var(--x) * 1deg)) rotateX(calc(var(--y) * 1deg));
 	perspective: 10000px;
 	transform-style: preserve-3d;
 }
