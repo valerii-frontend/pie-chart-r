@@ -6,14 +6,19 @@ import Controls from "./components/Controls";
 function App() {
 	const [load, setLoad] = useState(false);
 	const [parts, setParts] = useState(null);
-	const initValues = (parts) => {
+	const [inputs, setInputs] = useState({});
+	const [controls, setControls] = useState({ x: 15, y: 45, z: 0, s: 1 });
+	let styles = { "--x": controls.x, "--y": controls.y, "--z": controls.z, "--scale": controls.s };
+
+	let fullValue = Object.values(inputs).reduce((a, c) => +a + +c, 0);
+
+	function initValues(parts) {
 		let obj = {};
 		for (let i = 1; i <= parts; i++) {
 			obj[`--value${i}`] = 1;
 		}
 		return obj;
-	};
-	const [inputs, setInputs] = useState(() => initValues(parts));
+	}
 
 	const newInput = (number) => (
 		<div className='input' key={number}>
@@ -30,9 +35,6 @@ function App() {
 			/>
 		</div>
 	);
-	const [controls, setControls] = useState({ x: 15, y: 45, z: 0, s: 1 });
-	let styles = { "--x": controls.x, "--y": controls.y, "--z": controls.z, "--scale": controls.s };
-	let fullValue = Object.values(inputs).reduce((a, c) => +a + +c, 0);
 
 	function start(count) {
 		let arr = [];
@@ -46,7 +48,19 @@ function App() {
 		<div className={`App ${load ? "load" : ""}`} style={styles}>
 			<div className={`modal ${load ? "load" : ""}`}>
 				<label htmlFor='parts-number'>set parts number</label>
-				<input type='number' name='parts-number' id='parts-number' onChange={(e) => setParts(+e.target.value)} />
+				<input
+					min={2}
+					max={10}
+					step={1}
+					type='number'
+					name='parts-number'
+					id='parts-number'
+					onChange={(e) => {
+						setParts(+e.target.value);
+
+						setInputs(() => initValues(parts));
+					}}
+				/>
 				<button onClick={() => setLoad(true)}>load</button>
 			</div>
 			<h1>Total - {fullValue}</h1>
