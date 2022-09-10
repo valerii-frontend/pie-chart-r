@@ -1,19 +1,22 @@
 import React from "react";
 
-export default function Legend({ values, fullValue }) {
-	const newItem = (num) =>
-		values["--value" + num] && (
-			<li>
-				{values["--value" + num]}
-				{` (${((values["--value" + num] / fullValue) * 100).toFixed(2)}%) `}
-			</li>
-		);
-
-	return (
-		<ul className='legend'>
-			{newItem(1)}
-			{newItem(2)}
-			{newItem(3)}
-		</ul>
+export default function Legend({ values, fullValue, parts }) {
+	const newItem = (num) => (
+		<li key={`--value--${num}`}>
+			{`field-${num}`}
+			<br />
+			{values["--value" + num]}
+			{` (${((values["--value" + num] / fullValue) * 100).toFixed(2)}%) `}
+		</li>
 	);
+	function start(count) {
+		let arr = [];
+		for (let i = 1; i < count + 1; i++) {
+			arr.push(newItem(i));
+		}
+		return arr;
+	}
+	let array = start(parts);
+
+	return <ul className='legend'>{array}</ul>;
 }

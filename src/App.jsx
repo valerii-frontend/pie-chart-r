@@ -5,9 +5,18 @@ import Controls from "./components/Controls";
 
 function App() {
 	const [load, setLoad] = useState(false);
-	const [inputs, setInputs] = useState({ "--value1": 1, "--value2": 1, "--value3": 1 });
+	const [parts, setParts] = useState(null);
+	const initValues = (parts) => {
+		let obj = {};
+		for (let i = 1; i <= parts; i++) {
+			obj[`--value${i}`] = 1;
+		}
+		return obj;
+	};
+	const [inputs, setInputs] = useState(() => initValues(parts));
+
 	const newInput = (number) => (
-		<div className='input'>
+		<div className='input' key={number}>
 			<label htmlFor={number}>field - {number}</label>
 			<input
 				min={0}
@@ -22,22 +31,29 @@ function App() {
 		</div>
 	);
 	const [controls, setControls] = useState({ x: 15, y: 45, z: 0, s: 1 });
+	let styles = { "--x": controls.x, "--y": controls.y, "--z": controls.z, "--scale": controls.s };
 	let fullValue = Object.values(inputs).reduce((a, c) => +a + +c, 0);
 
+	function start(count) {
+		let arr = [];
+		for (let i = 1; i < count + 1; i++) {
+			arr.push(newInput(i));
+		}
+		return arr;
+	}
+
 	return (
-		<div
-			className={`App ${load ? "load" : ""}`}
-			style={{ "--x": controls.x, "--y": controls.y, "--z": controls.z, "--scale": controls.s }}>
+		<div className={`App ${load ? "load" : ""}`} style={styles}>
 			<div className={`modal ${load ? "load" : ""}`}>
+				<label htmlFor='parts-number'>set parts number</label>
+				<input type='number' name='parts-number' id='parts-number' onChange={(e) => setParts(+e.target.value)} />
 				<button onClick={() => setLoad(true)}>load</button>
 			</div>
 			<h1>Total - {fullValue}</h1>
-			<PieChart values={inputs} fullValue={fullValue} />
-			<Legend values={inputs} fullValue={fullValue} />
+			<PieChart values={inputs} fullValue={fullValue} parts={parts} />
+			<Legend values={inputs} fullValue={fullValue} parts={parts} />
 			<div className='sidebar'>
-				{newInput(1)}
-				{newInput(2)}
-				{newInput(3)}
+				{start(parts)}
 				<Controls controls={controls} setControls={setControls} />
 			</div>
 		</div>

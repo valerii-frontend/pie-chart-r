@@ -1,18 +1,20 @@
 import React from "react";
 
-export default function PieChart({ values, fullValue }) {
+export default function PieChart({ values, fullValue, parts }) {
 	let styles = {};
-
+	let temp = [];
 	const updateStyle = (count) => {
-		let temp = [];
-		temp[0] = +values[`--value${1}`];
-		styles[`--value${1}`] = `${((temp[0] / fullValue) * 100).toFixed(2)}%`;
-		temp[1] = temp[0] + +values[`--value${2}`];
-		styles[`--value${2}`] = `${((temp[1] / fullValue) * 100).toFixed(2)}%`;
-		temp[2] = temp[1] + +values[`--value${3}`];
-		styles[`--value${3}`] = `${((temp[2] / fullValue) * 100).toFixed(2)}%`;
+		for (let i = 0; i < count; i++) {
+			if (i === 0) {
+				temp[i] = +values[`--value${i + 1}`];
+				styles[`--value${i + 1}`] = `${((temp[i] / fullValue) * 100).toFixed(2)}%`;
+			} else {
+				temp[i] = temp[i - 1] + +values[`--value${i + 1}`];
+				styles[`--value${i + 1}`] = `${((temp[i] / fullValue) * 100).toFixed(2)}%`;
+			}
+		}
 	};
-	updateStyle();
+	updateStyle(parts);
 
 	return (
 		<div className='wrap' style={styles}>
