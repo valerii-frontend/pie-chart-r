@@ -57,11 +57,15 @@ function App() {
 					id='parts-number'
 					onChange={(e) => {
 						setParts(+e.target.value);
-
-						setInputs(() => initValues(parts));
 					}}
 				/>
-				<button onClick={() => setLoad(true)}>load</button>
+				<button
+					onClick={() => {
+						setLoad(true);
+						setInputs(() => initValues(parts));
+					}}>
+					load
+				</button>
 			</div>
 			<h1>Total - {fullValue}</h1>
 			<PieChart values={inputs} fullValue={fullValue} parts={parts} />
