@@ -67,7 +67,7 @@ function App() {
 					load
 				</button>
 			</div>
-			<h1>Total - {fullValue}</h1>
+			<h1>Total - {fullValue} (100%)</h1>
 			<PieChart values={inputs} fullValue={fullValue} parts={parts} />
 			<Legend values={inputs} fullValue={fullValue} parts={parts} />
 			<div className='sidebar'>

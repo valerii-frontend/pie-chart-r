@@ -19,8 +19,8 @@
 	--color6: hsl(calc(var(--num) * 10), 20%, 35%);
 	--color7: hsl(calc(var(--num) * 3), 20%, 35%);
 	--color8: hsl(calc(var(--num) * 5), 50%, 35%);
-	--color9: hsl(calc(var(--num) * 7), 50%, 35%);
-	--color10: hsl(calc(var(--num) * 9), 50%, 35%);
+	--color9: hsl(calc(var(--num) * 7), 30%, 40%);
+	--color10: hsl(calc(var(--num) * 9), 20%, 50%);
 	--pieSize: 25rem;
 }
 #root {
@@ -43,19 +43,24 @@
 .App h1 {
 	position: fixed;
 	top: 0;
-	left: 198px;
-	right: 198px;
-	box-shadow: 0 1px 1px 0 var(--shadow);
-	max-width: 100%;
 	text-align: center;
-	font-size: 2rem;
-	background-color: var(--light-grey);
+	text-transform: uppercase;
+	font-size: 2.25rem;
 	z-index: 10;
 	transition: all 1s;
 	transform: translateY(-100%);
+	color: #f5f5f5;
+	text-shadow: 1px 1px 1px #919191, 1px 2px 1px #919191, 1px 3px 1px #919191, 1px 4px 1px #919191, 1px 5px 1px #919191,
+		1px 6px 1px #919191, 1px 7px 1px #919191, 1px 8px 1px #919191, 1px 9px 1px #919191, 1px 10px 1px #919191,
+		1px 18px 6px rgba(16, 16, 16, 0.4), 1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2),
+		1px 30px 60px rgba(16, 16, 16, 0.4);
+	padding: 1rem;
+	background-color: #c4c4c4;
+	border-radius: 10px;
+	box-shadow: 0 0 10px 0 var(--shadow);
 }
 .App.load h1 {
-	transform: translateY(0);
+	transform: translateY(10%);
 }
 .App h1:before {
 	content: "";
@@ -75,6 +80,7 @@
 	box-shadow: 0 0 10px 0 var(--shadow);
 	transform: translateX(-100%);
 	transition: all 1s;
+	overflow: auto;
 }
 .App.load .sidebar {
 	transform: translateX(0);
@@ -250,23 +256,38 @@
 	list-style: none;
 	transition: all 1s;
 	transform: translateX(100%);
+	z-index: 10;
+	overflow: auto;
+	direction: rtl;
 }
 .App.load .legend {
 	transform: translateX(0);
 }
 
 .legend li {
-	margin-bottom: 1rem;
 	display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: wrap;
 	align-items: center;
+	margin-bottom: 1.5rem;
+}
+.legend li i {
+	flex: 0 0 50%;
+	order: 2;
+	text-align: left;
+}
+.legend li b {
+	order: 3;
 }
 .legend li:before {
 	content: "";
-	width: 24px;
-	height: 24px;
-	margin-right: 1rem;
+	width: 40px;
+	height: 40px;
+	flex: 0 0 40px;
+	margin: 0 0.5rem 0.5rem 0;
 	background-color: var(--color-cube);
 	border-radius: 0.3rem;
+	order: 1;
 }
 .legend li:nth-child(1):before {
 	--color-cube: var(--color1);
@@ -297,4 +318,17 @@
 }
 .legend li:nth-child(10):before {
 	--color-cube: var(--color10);
+}
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+	border: 1px solid #fbfbfd;
+}
+::-webkit-scrollbar-track {
+	border-radius: 0;
+	background: #fbfbfd;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 0;
+	background: #575757;
 }

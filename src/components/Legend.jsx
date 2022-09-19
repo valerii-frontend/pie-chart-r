@@ -3,10 +3,12 @@ import React from "react";
 export default function Legend({ values, fullValue, parts }) {
 	const newItem = (num) => (
 		<li key={`--value--${num}`}>
-			{`field-${num}`}
-			<br />
-			{values["--value" + num]}
-			{` (${((values["--value" + num] / fullValue) * 100).toFixed(2)}%) `}
+			<i>{`field-${num}`}</i>
+
+			<b>
+				{values["--value" + num]}
+				{` (${((values["--value" + num] / fullValue) * 100).toFixed(2)}%) `}
+			</b>
 		</li>
 	);
 	function start(count) {
