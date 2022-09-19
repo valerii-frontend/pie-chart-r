@@ -53,12 +53,12 @@ export default function Controls({ controls, setControls }) {
 			</div>
 			<div className='scale'>
 				<label htmlFor='scale'>
-					Scale - <strong>{controls.s * 100}%</strong>
+					Scale - <strong>{parseInt(controls.s * 100)}%</strong>
 				</label>
 				<input
-					min={1}
+					min={0.5}
 					max={2}
-					step={0.2}
+					step={0.1}
 					defaultValue={1}
 					type='range'
 					id='scale'

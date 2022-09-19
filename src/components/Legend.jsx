@@ -6,7 +6,7 @@ export default function Legend({ values, fullValue, parts }) {
 			<i>{`field-${num}`}</i>
 
 			<b>
-				{values["--value" + num]}
+				<span>{values["--value" + num]}</span>
 				{` (${((values["--value" + num] / fullValue) * 100).toFixed(2)}%) `}
 			</b>
 		</li>

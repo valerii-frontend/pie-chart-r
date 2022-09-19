@@ -10,6 +10,8 @@ function App() {
 	const [controls, setControls] = useState({ x: 15, y: 45, z: 0, s: 1 });
 	let styles = { "--x": controls.x, "--y": controls.y, "--z": controls.z, "--scale": controls.s };
 
+	const [interfaceToggle, setInterfaceToggle] = useState(true);
+
 	let fullValue = Object.values(inputs).reduce((a, c) => +a + +c, 0);
 
 	function initValues(parts) {
@@ -67,13 +69,21 @@ function App() {
 					load
 				</button>
 			</div>
-			<h1>Total - {fullValue} (100%)</h1>
-			<PieChart values={inputs} fullValue={fullValue} parts={parts} />
-			<Legend values={inputs} fullValue={fullValue} parts={parts} />
-			<div className='sidebar'>
-				{start(parts)}
-				<Controls controls={controls} setControls={setControls} />
+			{interfaceToggle && <h1>Total - {fullValue} (100%)</h1>}
+			<div className='interface-toggle'>
+				<label htmlFor='ui-toggle'>
+					<b>{interfaceToggle ? "hide" : "show"}</b> interface
+				</label>
+				<input id='ui-toggle' type='checkbox' onChange={() => setInterfaceToggle((p) => !p)} />
 			</div>
+			<PieChart values={inputs} fullValue={fullValue} parts={parts} />
+			{interfaceToggle && <Legend values={inputs} fullValue={fullValue} parts={parts} />}
+			{interfaceToggle && (
+				<div className='sidebar'>
+					{start(parts)}
+					<Controls controls={controls} setControls={setControls} />
+				</div>
+			)}
 		</div>
 	);
 }

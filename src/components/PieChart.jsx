@@ -15,7 +15,6 @@ export default function PieChart({ values, fullValue, parts }) {
 		}
 	};
 	updateStyle(parts);
-	console.log(styles);
 	return (
 		<div className='wrap' style={styles}>
 			<div className='pie pie_1'></div>
